@@ -14,6 +14,51 @@ div.app {
   margin: 0 auto;
   margin-top: 1%;
   border: 1px solid blue;
-  width: 80%;
-  height: 90%;
+  width: 800px;
+  height: 600px;
+}
+
+div.app div.cell {
+  padding: 0;
+  margin: 0;
+  width: 10px;
+  height: 10px;
+  outline: 1px solid;
+  float: left;
+  background: #fff;
+}
+
+div.app div.cell.on {
+  background: lightgreen;
+}
+
+div.speed-control {
+  position: fixed;
+  top: 4%;
+  right: 10%;
+}
+
+div.start-stop {
+  position: fixed;
+  top: 17%;
+  right: 10%;
+  padding: 10px 20px;
+  font-weight: bold;
+  background: #6e4;
+  border: 1px solid #888;
+  border-radius: 3px;
+  width: 63px;
+  text-align: center;
+}
+
+div.speed-control div {
+  display: inline-block;
+  background: #7f3;
+  padding: 10px;
+  border: 1px solid #888;
+  border-radius: 3px;
+}
+
+div.speed-control div.value {
+  background: #3f7;
 }
