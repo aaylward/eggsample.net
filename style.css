@@ -1,0 +1,10 @@
+html, body {
+  font-family: monospace;
+  position: relative;
+  height: 98%;
+  width: 100%;
+  padding: 0;
+  margin: 0;
+  background: #dee;
+}
+
