@@ -109,22 +109,26 @@
     return false;
   }
 
+  function handleCellTouch(state, event) {
+    event.preventDefault();
+    const target = event.target;
+    const row = parseInt(target.classList[0], 10);
+    const col = parseInt(target.classList[1], 10);
+    let on = state.cells[row][col] = !state.cells[row][col];
+    if (on) {
+      target.classList.add("on");
+    } else {
+      target.classList.remove("on");
+    }
+    return false;
+  }
+
   function attachListeners(state) {
     const pauseHandler = handlePauseButton.bind(state);
+    const cellHandler = handleCellTouch.bind(state);
 
-    state.appDiv.addEventListener("click", function(event) {
-      event.preventDefault();
-      const target = event.target;
-      const row = parseInt(target.classList[0], 10);
-      const col = parseInt(target.classList[1], 10);
-      let on = state.cells[row][col] = !state.cells[row][col];
-      if (on) {
-        target.classList.add("on");
-      } else {
-        target.classList.remove("on");
-      }
-      return false;
-    });
+    state.appDiv.addEventListener("click", cellHandler);
+    state.appDiv.addEventListener("touchStart", cellHandler);
 
     state.pause.addEventListener("click", pauseHandler);
     state.pause.addEventListener("touchStart", pauseHandler);
