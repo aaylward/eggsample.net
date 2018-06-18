@@ -92,7 +92,26 @@
     return false;
   }
 
+  function handlePauseButton(state, event) {
+    event.preventDefault();
+    const target = event.target;
+    if (state.paused) {
+      target.innerText = "pause";
+    } else {
+      target.innerText = "start";
+    }
+
+    state.paused = !state.paused;
+    if (!state.paused) {
+      nextState(state);
+    }
+
+    return false;
+  }
+
   function attachListeners(state) {
+    const pauseHandler = handlePauseButton.bind(state);
+
     state.appDiv.addEventListener("click", function(event) {
       event.preventDefault();
       const target = event.target;
@@ -107,22 +126,8 @@
       return false;
     });
 
-    state.pause.addEventListener("click", function(event) {
-      event.preventDefault();
-      const target = event.target;
-      if (state.paused) {
-        target.innerText = "pause";
-      } else {
-        target.innerText = "start";
-      }
-
-      state.paused = !state.paused;
-      if (!state.paused) {
-        nextState(state);
-      }
-
-      return false;
-    });
+    state.pause.addEventListener("click", pauseHandler);
+    state.pause.addEventListener("touchStart", pauseHandler);
   }
 
   function nextState(state) {
