@@ -124,8 +124,8 @@
   }
 
   function attachListeners(state) {
-    const pauseHandler = handlePauseButton.bind(state);
-    const cellHandler = handleCellTouch.bind(state);
+    const pauseHandler = handlePauseButton.bind(null, state);
+    const cellHandler = handleCellTouch.bind(null, state);
 
     state.appDiv.addEventListener("click", cellHandler);
     state.appDiv.addEventListener("touchStart", cellHandler);
