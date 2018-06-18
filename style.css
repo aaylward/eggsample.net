@@ -23,7 +23,7 @@ div.app div.cell {
   margin: 0;
   width: 10px;
   height: 10px;
-  outline: 1px solid;
+  outline: 1px solid rgba(170, 50, 220, .2);
   float: left;
   background: #fff;
 }
