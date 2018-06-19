@@ -40,15 +40,13 @@
     return (col + cols + 1) % cols;
   }
 
-  function computeState(state, row, col) {
+  function computeLiveNeighbors(state, row, col) {
     let numberOfLiveNeighbors = 0;
     const oldCells = state.cells;
     const rowUp = up(row, state.rows);
     const rowDown = down(row, state.rows);
     const colLeft = left(col, state.cols);
     const colRight = right(col, state.cols);
-
-    const alive = oldCells[row][col];
 
     if (oldCells[rowUp][colLeft]) {
       numberOfLiveNeighbors++;
@@ -75,21 +73,17 @@
       numberOfLiveNeighbors++;
     }
 
-    if (alive && numberOfLiveNeighbors < 2) {
-      return false;
-    }
+    return numberOfLiveNeighbors;
 
-    if (alive && (numberOfLiveNeighbors === 2 || numberOfLiveNeighbors === 3)) {
-      return true;
-    }
+  }
 
-    if (alive && numberOfLiveNeighbors > 3) {
-      return false;
+  function computeState(state, row, col) {
+    const numberOfLiveNeighbors = computeLiveNeighbors(state, row, col);
+
+    if (state.cells[row][col]) {
+      return numberOfLiveNeighbors === 2 || numberOfLiveNeighbors === 3;
     }
-    if (!alive && numberOfLiveNeighbors === 3) {
-      return true;
-    }
-    return false;
+    return numberOfLiveNeighbors === 3;
   }
 
   function handlePauseButton(state, event) {
