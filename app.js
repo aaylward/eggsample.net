@@ -98,15 +98,39 @@
     return false;
   }
 
+  function handleFasterTouch(state, event) {
+    event.preventDefault();
+    if (state.speed < 7) {
+      state.speed++;
+    }
+    return false;
+  }
+
+  function handleSlowerTouch(state, event) {
+    event.preventDefault();
+    if (state.speed > 1) {
+      state.speed--;
+    }
+    return false;
+  }
+
   function attachListeners(state) {
     const pauseHandler = handlePauseButton.bind(null, state);
     const cellHandler = handleCellTouch.bind(null, state);
+    const fasterHandler = handleFasterTouch.bind(null, state);
+    const slowerHandler = handleSlowerTouch.bind(null, state);
 
     state.appDiv.addEventListener("click", cellHandler);
     state.appDiv.addEventListener("touchStart", cellHandler);
 
     state.pause.addEventListener("click", pauseHandler);
     state.pause.addEventListener("touchStart", pauseHandler);
+    
+    state.fasterDiv.addEventListener("click", fasterHandler);
+    state.fasterDiv.addEventListener("touchStart", fasterHandler);
+
+    state.slowerDiv.addEventListener("click", slowerHandler);
+    state.slowerDiv.addEventListener("touchStart", slowerHandler);
   }
 
   function nextState(state) {
@@ -121,7 +145,7 @@
     state.cells = newCells;
     drawWorld(state);
     if (!state.paused) {
-      setTimeout(nextState, 500, state);
+      setTimeout(nextState, 500 / state.speed, state);
     }
   }
 
@@ -194,8 +218,9 @@
   function start() {
     const appDiv = document.querySelector("div.app");
     const speedDiv = document.querySelector("div.speed-control div.value");
+    const fasterDiv = document.querySelector("div.speed-control div.faster");
+    const slowerDiv = document.querySelector("div.speed-control div.slower");
     const pause = document.querySelector("div.start-stop");
-    let speed = 1;
     
     const cells = [];
     for (let row=0; row<60; row++) {
@@ -209,8 +234,10 @@
       paused: true,
       appDiv: appDiv,
       speedDiv: speedDiv,
+      fasterDiv: fasterDiv,
+      slowerDiv: slowerDiv,
       pause: pause,
-      speed: speed,
+      speed: 3,
       cells: cells,
       rows: 60,
       cols: 80
