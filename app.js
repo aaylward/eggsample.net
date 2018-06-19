@@ -48,33 +48,16 @@
     const colLeft = left(col, state.cols);
     const colRight = right(col, state.cols);
 
-    if (oldCells[rowUp][colLeft]) {
-      numberOfLiveNeighbors++;
-    }
-    if (oldCells[rowUp][col]) {
-      numberOfLiveNeighbors++;
-    }
-    if (oldCells[rowUp][colRight]) {
-      numberOfLiveNeighbors++;
-    }
-    if (oldCells[row][colLeft]) {
-      numberOfLiveNeighbors++;
-    }
-    if (oldCells[row][colRight]) {
-      numberOfLiveNeighbors++;
-    }
-    if (oldCells[rowDown][colLeft]) {
-      numberOfLiveNeighbors++;
-    }
-    if (oldCells[rowDown][col]) {
-      numberOfLiveNeighbors++;
-    }
-    if (oldCells[rowDown][colRight]) {
-      numberOfLiveNeighbors++;
-    }
+    if (oldCells[rowUp][colLeft]) numberOfLiveNeighbors++;
+    if (oldCells[rowUp][col]) numberOfLiveNeighbors++;
+    if (oldCells[rowUp][colRight]) numberOfLiveNeighbors++;
+    if (oldCells[row][colLeft]) numberOfLiveNeighbors++;
+    if (oldCells[row][colRight]) numberOfLiveNeighbors++;
+    if (oldCells[rowDown][colLeft]) numberOfLiveNeighbors++;
+    if (oldCells[rowDown][col]) numberOfLiveNeighbors++;
+    if (oldCells[rowDown][colRight]) numberOfLiveNeighbors++;
 
     return numberOfLiveNeighbors;
-
   }
 
   function computeState(state, row, col) {
