@@ -1,13 +1,11 @@
 (function (){
-
   function makeCell(state, row, col) {
     const div = document.createElement("div");
-    div.classList = "" + row + " " + col + " cell";
-
     if (state.cells[row][col]) {
       div.classList = "" + row + " " + col + " cell on";
+    } else {
+      div.classList = "" + row + " " + col + " cell";
     }
-
     return div;
   }
   
