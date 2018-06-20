@@ -119,7 +119,9 @@
 
   function handleClear(state, event) {
     event.preventDefault();
-    state.cells.fill(false);
+    for (row of state.cells) {
+      row.fill(false);
+    }
     drawWorld(state);
     return false;
   }
