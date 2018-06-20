@@ -103,8 +103,8 @@
     event.preventDefault();
     if (state.speed < 7) {
       state.speed++;
+      drawWorld(state);
     }
-    drawWorld(state);
     return false;
   }
 
@@ -112,8 +112,8 @@
     event.preventDefault();
     if (state.speed > 1) {
       state.speed--;
+      drawWorld(state);
     }
-    drawWorld(state);
     return false;
   }
 
