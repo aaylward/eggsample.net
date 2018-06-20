@@ -89,7 +89,8 @@
     const target = event.target;
     const row = parseInt(target.classList[0], 10);
     const col = parseInt(target.classList[1], 10);
-    let on = state.cells[row][col] = !state.cells[row][col];
+    state.cells[row][col] = (!state.cells[row][col]);
+    let on = state.cells[row][col];
     if (on) {
       target.classList.add("on");
     } else {
@@ -103,6 +104,7 @@
     if (state.speed < 7) {
       state.speed++;
     }
+    drawWorld(state);
     return false;
   }
 
@@ -111,6 +113,14 @@
     if (state.speed > 1) {
       state.speed--;
     }
+    drawWorld(state);
+    return false;
+  }
+
+  function handleClear(state, event) {
+    event.preventDefault();
+    state.cells.fill(false);
+    drawWorld(state);
     return false;
   }
 
@@ -119,6 +129,7 @@
     const cellHandler = handleCellTouch.bind(null, state);
     const fasterHandler = handleFasterTouch.bind(null, state);
     const slowerHandler = handleSlowerTouch.bind(null, state);
+    const clearHandler = handleClear.bind(null, state);
 
     state.appDiv.addEventListener("click", cellHandler);
     state.appDiv.addEventListener("touchStart", cellHandler);
@@ -131,6 +142,9 @@
 
     state.slowerDiv.addEventListener("click", slowerHandler);
     state.slowerDiv.addEventListener("touchStart", slowerHandler);
+
+    state.clearDiv.addEventListener("click", clearHandler);
+    state.clearDiv.addEventListener("touchStart", clearHandler);
   }
 
   function nextState(state) {
@@ -221,6 +235,7 @@
     const fasterDiv = document.querySelector("div.speed-control div.faster");
     const slowerDiv = document.querySelector("div.speed-control div.slower");
     const pause = document.querySelector("div.start-stop");
+    const clearDiv = document.querySelector("div.clear-state");
     
     const cells = [];
     for (let row=0; row<60; row++) {
@@ -237,6 +252,7 @@
       fasterDiv: fasterDiv,
       slowerDiv: slowerDiv,
       pause: pause,
+      clearDiv: clearDiv,
       speed: 3,
       cells: cells,
       rows: 60,

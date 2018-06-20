@@ -32,31 +32,46 @@ div.app div.cell.on {
   background: lightgreen;
 }
 
-div.speed-control {
+div.controls {
   position: fixed;
   top: 4%;
   right: 10%;
 }
 
-div.start-stop {
-  position: fixed;
-  top: 17%;
-  right: 10%;
-  padding: 10px 20px;
+div.controls div {
+  padding: 10px 24px;
+  margin-bottom: 4px;
   font-weight: bold;
-  background: #6e4;
+  background: #7e3;
   border: 1px solid #888;
   border-radius: 3px;
   width: 63px;
   text-align: center;
+  cursor: default;
+}
+
+div.controls div.speed-control {
+  display: inline;
+  padding: 0;
+  border: none;
+  background: transparent;
+}
+
+div.controls div.start-stop:hover , div.controls div.clear-state:hover {
+  background: lightblue;
 }
 
 div.speed-control div {
+  width: 10px;
   display: inline-block;
   background: #7f3;
   padding: 10px;
   border: 1px solid #888;
   border-radius: 3px;
+}
+
+div.speed-control div:hover {
+  background: lightblue;
 }
 
 div.speed-control div.value {
