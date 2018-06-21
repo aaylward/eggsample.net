@@ -126,27 +126,17 @@
     return false;
   }
 
+  function attachHandler(div, handler, state) {
+    div.addEventListener("click", handler.bind(null, state));
+    div.addEventListener("touchStart", handler.bind(null, state));
+  }
+
   function attachListeners(state) {
-    const pauseHandler = handlePauseButton.bind(null, state);
-    const cellHandler = handleCellTouch.bind(null, state);
-    const fasterHandler = handleFasterTouch.bind(null, state);
-    const slowerHandler = handleSlowerTouch.bind(null, state);
-    const clearHandler = handleClear.bind(null, state);
-
-    state.appDiv.addEventListener("click", cellHandler);
-    state.appDiv.addEventListener("touchStart", cellHandler);
-
-    state.pause.addEventListener("click", pauseHandler);
-    state.pause.addEventListener("touchStart", pauseHandler);
-    
-    state.fasterDiv.addEventListener("click", fasterHandler);
-    state.fasterDiv.addEventListener("touchStart", fasterHandler);
-
-    state.slowerDiv.addEventListener("click", slowerHandler);
-    state.slowerDiv.addEventListener("touchStart", slowerHandler);
-
-    state.clearDiv.addEventListener("click", clearHandler);
-    state.clearDiv.addEventListener("touchStart", clearHandler);
+    attachHandler(state.appDiv, handleCellTouch, state);
+    attachHandler(state.pause, handlePauseButton, state);
+    attachHandler(state.fasterDiv, handleFasterTouch, state);
+    attachHandler(state.slowerDiv, handleSlowerTouch, state);
+    attachHandler(state.clearDiv, handleClear, state);
   }
 
   function nextState(state) {
